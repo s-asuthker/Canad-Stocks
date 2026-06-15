@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from flask import Flask, render_template, request, jsonify
 import io, base64, datetime
 from datetime import date
+from forex_python.converter import CurrencyRates
 matplotlib.use('Agg')
 def plot_2html(df_html,user_symbol,qtype):
     """type is 'stock' or 'economic'. """
@@ -44,10 +45,34 @@ def stock_graph():
             try:
                 closing_price=df_stock['Close'].iloc[-1,0]
                 print(closing_price) #for debugging as well
+                user_input=user_input.upper()
                 stock_graph_img = plot_2html(df_stock, user_input,"stock")
             except Exception as e:
                 closing_price=None
                 print(f"Sorry, it looks like there was an error: {e}")
-    return render_template("stocks.html",price=closing_price, graph=stock_graph_img)
+
+    #this code gets gold prices
+    gold = yf.Ticker("GC=F")
+    gold_price = gold.info.get('regularMarketPrice')
+    #this code gets current exchange rate sbetween popular currencies
+    c=CurrencyRates()
+
+    crate=c.get_rate('USD','EUR') #USD --> EUR
+    crate2=c.get_rate('EUR','USD')
+    crate3=c.get_rate('USD','CAD')
+    crate4=c.get_rate('CAD','USD')
+    crate5=c.get_rate('USD','GBP') #GBP=Great Britain Pound
+    crate6=c.get_rate('GBP','USD')
+    crate7=c.get_rate('USD','JPY')
+    rate_dic={
+        "rate": crate,
+        "rate2": crate2,
+        "rate3": crate3,
+        "rate4": crate4,
+        "rate5": crate5,
+        "rate6": crate6,
+        "rate7": crate7
+    }
+    return render_template("stocks.html",price=closing_price, graph=stock_graph_img,wgold_price=gold_price,rate_dic=rate_dic)
 if __name__ == '__main__':
     app.run(debug=True)
