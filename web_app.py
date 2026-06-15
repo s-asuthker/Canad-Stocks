@@ -7,6 +7,32 @@ import io, base64, datetime
 from datetime import date
 from forex_python.converter import CurrencyRates
 matplotlib.use('Agg')
+currencies = [
+    ("USD", "EUR"),
+    ("EUR", "USD"),
+    ("USD", "INR"),
+    ("USD", "CAD"),
+    ("CAD", "USD"),
+    ("USD", "GBP"),
+]
+c_cache = {"data": None, "time": 0}
+CACHE_TTL = 600  # 10 minutes
+def get_rate():
+    now=time.time()
+    if c_cache["data"] and (now - c_cache["time"] < CACHE_TTL):
+        print("Using cached currency rates")
+        return c_cache["data"]
+    else:
+        print("Getting current rates...")
+    c = CurrencyRates()
+    rates={}
+    for first, second in currencies:
+        try:
+            rate=c.get_rate(first,second)
+            rates[f"{first}->{second}"] = rate
+        except:
+            rates[f"{first}->{second}"] = "ERROR"
+    return rates
 def plot_2html(df_html,user_symbol,qtype):
     """type is 'stock' or 'economic'. """
     fig, ax = plt.subplots()
@@ -56,17 +82,6 @@ def stock_graph():
     #gold_price = gold.info.get('regularMarketPrice')
     gold.history(period="1d")['Close'].iloc[-1]
     #this code gets current exchange rate sbetween popular currencies
-    c=CurrencyRates()
-    try:
-        crate=c.get_rate('USD','EUR') #USD --> EUR
-        crate2=c.get_rate('EUR','USD')
-        crate3=c.get_rate('USD','CAD')
-        crate4=c.get_rate('CAD','USD')
-        crate5=c.get_rate('USD','GBP') #GBP=Great Britain Pound
-        crate6=c.get_rate('GBP','USD')
-        crate7=c.get_rate('USD','JPY')
-    except:
-        crate = crate2 = crate3 = crate4 = crate5 = crate6 = crate7 = None
     rate_dic={
         "rate": crate,
         "rate2": crate2,
