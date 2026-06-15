@@ -75,4 +75,8 @@ def stock_graph():
     }
     return render_template("stocks.html",price=closing_price, graph=stock_graph_img,wgold_price=gold_price,rate_dic=rate_dic)
 if __name__ == '__main__':
+<<<<<<< HEAD
     app.run(host="0.0.0.0",port=5000)
+=======
+    app.run(debug=True)
+>>>>>>> 142a50b (first deploy)
