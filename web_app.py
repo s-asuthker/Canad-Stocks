@@ -3,7 +3,7 @@ import yfinance as yf
 import pandas as pd
 import matplotlib.pyplot as plt
 from flask import Flask, render_template, request, jsonify
-import io, base64, datetime
+import io, base64, datetime, time
 from datetime import date
 from forex_python.converter import CurrencyRates
 matplotlib.use('Agg')
@@ -32,6 +32,8 @@ def get_rate():
             rates[f"{first}->{second}"] = rate
         except:
             rates[f"{first}->{second}"] = "ERROR"
+    c_cache["data"] = rates
+    c_cache["time"] = now
     return rates
 def plot_2html(df_html,user_symbol,qtype):
     """type is 'stock' or 'economic'. """
@@ -80,17 +82,9 @@ def stock_graph():
     #this code gets gold prices
     gold = yf.Ticker("GC=F")
     #gold_price = gold.info.get('regularMarketPrice')
-    gold.history(period="1d")['Close'].iloc[-1]
+    gold_price=gold.history(period="1d")['Close'].iloc[-1]
     #this code gets current exchange rate sbetween popular currencies
-    rate_dic={
-        "rate": crate,
-        "rate2": crate2,
-        "rate3": crate3,
-        "rate4": crate4,
-        "rate5": crate5,
-        "rate6": crate6,
-        "rate7": crate7
-    }
-    return render_template("stocks.html",price=closing_price, graph=stock_graph_img,wgold_price=gold_price,rate_dic=rate_dic)
+    rates=get_rate()
+    return render_template("stocks.html",price=closing_price, graph=stock_graph_img,wgold_price=gold_price,rate_dic=rates)
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=5000)
