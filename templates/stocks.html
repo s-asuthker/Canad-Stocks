@@ -18,28 +18,18 @@
     <div class="blackbox">
         <h2>Current Gold Price: </h2>
         <h3>{{wgold_price}}</h3>
-
-        <h2>USD --> EUR</h2>
-        <h3>{{rate_dic.rate}}</h3>
-
-        <h2>EUR --> USD</h2>
-        <h3>{{rate_dic.rate2}}</h3>
-
-        <h2>USD --> CAD</h2>
-        <h3>{{rate_dic.rate3}}</h3>
+        <h2>USD → EUR</h2>
+        <h3>{{ rate_dic["USD->EUR"] }}</h3>
+        <h2>EUR → USD</h2>
+        <h3>{{ rate_dic["EUR->USD"] }}</h3>
     </div>
     <div class="blackbox">
-        <h2>CAD --> USD</h2>
-        <h3>{{rate_dic.rate4}}</h3>
-
-        <h2>USD --> GBP</h2>
-        <h3>{{rate_dic.rate5}}</h3>
-
-        <h2>GBP --> USD</h2>
-        <h3>{{rate_dic.rate6}}</h3>
-
-        <h2>USD --> JPY</h2>
-        <h3>{{rate_dic.rate7}}</h3>
+        <h2>USD → CAD</h2>
+        <h3>{{ rate_dic["USD->CAD"] }}</h3>
+        <h2>CAD → USD</h2>
+        <h3>{{ rate_dic["CAD->USD"] }}</h3>
+        <h2>USD → GBP</h2>
+        <h3>{{ rate_dic["USD->GBP"] }}</h3>
     </div>
 </body>
 </html>
