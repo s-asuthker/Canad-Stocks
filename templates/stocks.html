@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Canad Grapher v1.0.0</title>
+</head>
+<body>
+  <p>Enter a NASDAQ ticker symbol and view its graph and current market price</p>
+  <form method="POST" action="/">
+    <input type="text" name="ticker_input" placeholder="Enter ticker symbol...">
+    <button type="submit">Enter</button>
+  </form>
+    <h2 style="display:inline">The current market price is: </h2>
+    <h2 style="display:inline">{{price}}</h2>
+    <h2>Graph:</h2>
+    <img src="data:image/png;base64,{{ graph }}" alt="Stock Graph" class="images">
+</body>
+</html>
