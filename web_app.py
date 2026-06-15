@@ -58,12 +58,18 @@ app = Flask(__name__)
 def stock_graph():
     closing_price=None
     stock_graph_img=None
+    stock_data_dic=None
     if request.method == 'POST':
         user_input=request.form.get('ticker_input')
         end=datetime.datetime.today()
         start = end - datetime.timedelta(days=182)  # sets timeframe to 6 months before present
         if user_input:
             df_stock = yf.download(user_input, start=start, end=end) #gets stock data
+            stock_data_dic={
+                '52wh':round(df_stock['Close'].max().iloc[0],2),
+                '52wl':round(df_stock['Close'].min().iloc[0],2),
+                'vol':df_stock['Volume'].iloc[0].mean()
+            }
             print("EMPTY DF?", df_stock.empty)
             print(df_stock.tail())
             print(df_stock) # for debugging purposes
@@ -82,6 +88,6 @@ def stock_graph():
     gold_price=gold.history(period="1d")['Close'].iloc[-1]
     #this code gets current exchange rate sbetween popular currencies
     rates=get_rate()
-    return render_template("stocks.html",price=closing_price, graph=stock_graph_img,wgold_price=gold_price,rate_dic=rates)
+    return render_template("stocks.html",price=closing_price, graph=stock_graph_img,wgold_price=gold_price,rate_dic=rates,stock_dic=stock_data_dic)
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=5000)
