@@ -56,14 +56,16 @@ def stock_graph():
     gold_price = gold.info.get('regularMarketPrice')
     #this code gets current exchange rate sbetween popular currencies
     c=CurrencyRates()
-
-    crate=c.get_rate('USD','EUR') #USD --> EUR
-    crate2=c.get_rate('EUR','USD')
-    crate3=c.get_rate('USD','CAD')
-    crate4=c.get_rate('CAD','USD')
-    crate5=c.get_rate('USD','GBP') #GBP=Great Britain Pound
-    crate6=c.get_rate('GBP','USD')
-    crate7=c.get_rate('USD','JPY')
+    try:
+        crate=c.get_rate('USD','EUR') #USD --> EUR
+        crate2=c.get_rate('EUR','USD')
+        crate3=c.get_rate('USD','CAD')
+        crate4=c.get_rate('CAD','USD')
+        crate5=c.get_rate('USD','GBP') #GBP=Great Britain Pound
+        crate6=c.get_rate('GBP','USD')
+        crate7=c.get_rate('USD','JPY')
+    except:
+        crate = crate2 = crate3 = crate4 = crate5 = crate6 = crate7 = None
     rate_dic={
         "rate": crate,
         "rate2": crate2,
@@ -75,8 +77,4 @@ def stock_graph():
     }
     return render_template("stocks.html",price=closing_price, graph=stock_graph_img,wgold_price=gold_price,rate_dic=rate_dic)
 if __name__ == '__main__':
-<<<<<<< HEAD
     app.run(host="0.0.0.0",port=5000)
-=======
-    app.run(debug=True)
->>>>>>> 142a50b (first deploy)
