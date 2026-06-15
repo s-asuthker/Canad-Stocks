@@ -1,1 +1,4 @@
-mat
+matplotlib
+yfinance
+flask
+
