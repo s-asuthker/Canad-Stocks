@@ -1,4 +1,7 @@
 matplotlib
 yfinance
 flask
+io
+base64
+datetime
 
