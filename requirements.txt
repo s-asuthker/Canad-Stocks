@@ -1,8 +1,7 @@
+flask
+gunicorn
 matplotlib
 yfinance
-flask
-io
-base64
-datetime
-forex_python.converter
-matplot.pyplot
+pandas
+forex-python
+requests
