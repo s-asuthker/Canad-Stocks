@@ -53,7 +53,8 @@ def stock_graph():
 
     #this code gets gold prices
     gold = yf.Ticker("GC=F")
-    gold_price = gold.info.get('regularMarketPrice')
+    #gold_price = gold.info.get('regularMarketPrice')
+    gold.history(period="1d")['Close'].iloc[-1]
     #this code gets current exchange rate sbetween popular currencies
     c=CurrencyRates()
     try:
