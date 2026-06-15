@@ -5,5 +5,4 @@ io
 base64
 datetime
 forex_python.converter
-from datetime import date
 matplot.pyplot
