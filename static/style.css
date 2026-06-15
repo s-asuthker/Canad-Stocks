@@ -10,6 +10,9 @@ h1{
 color: blue;
 font-family: cursive
 }
+h2{
+    color: white
+}
 .images:hover{
     width: 700px;
     height:500px;
