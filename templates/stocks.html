@@ -11,9 +11,35 @@
     <input type="text" name="ticker_input" placeholder="Enter ticker symbol...">
     <button type="submit">Enter</button>
   </form>
-    <h2 style="display:inline">The current market price is: </h2>
-    <h2 style="display:inline">{{price}}</h2>
-    <h2>Graph:</h2>
+    <h3 style="display:inline">The current market price is: </h3>
+    <h3 style="display:inline">{{price}}</h3>
+    <h3>Graph:</h3>
     <img src="data:image/png;base64,{{ graph }}" alt="Stock Graph" class="images">
+    <div class="blackbox">
+        <h2>Current Gold Price: </h2>
+        <h3>{{wgold_price}}</h3>
+
+        <h2>USD --> EUR</h2>
+        <h3>{{rate_dic.rate}}</h3>
+
+        <h2>EUR --> USD</h2>
+        <h3>{{rate_dic.rate2}}</h3>
+
+        <h2>USD --> CAD</h2>
+        <h3>{{rate_dic.rate3}}</h3>
+    </div>
+    <div class="blackbox">
+        <h2>CAD --> USD</h2>
+        <h3>{{rate_dic.rate4}}</h3>
+
+        <h2>USD --> GBP</h2>
+        <h3>{{rate_dic.rate5}}</h3>
+
+        <h2>GBP --> USD</h2>
+        <h3>{{rate_dic.rate6}}</h3>
+
+        <h2>USD --> JPY</h2>
+        <h3>{{rate_dic.rate7}}</h3>
+    </div>
 </body>
 </html>
