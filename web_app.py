@@ -62,7 +62,10 @@ def stock_graph():
     if request.method == 'POST':
         user_input=request.form.get('ticker_input')
         end=datetime.datetime.today()
-        start = end - datetime.timedelta(days=182)  # sets timeframe to 6 months before present
+        try:
+            start = end.replace(year=end.year - 1)  # sets timeframe to 1 year before present
+        except:
+            start = end.replace(year=end.year - 1, day=28) 
         if user_input:
             df_stock = yf.download(user_input, start=start, end=end) #gets stock data
             stock_data_dic={
