@@ -74,7 +74,7 @@ def stock_graph():
             print(df_stock.tail())
             print(df_stock) # for debugging purposes
             try:
-                closing_price=df_stock['Close'].iloc[-1,0]
+                closing_price=round(df_stock['Close'].iloc[-1,0],2)
                 print(closing_price) #for debugging as well
                 user_input=user_input.upper()
                 stock_graph_img = plot_2html(df_stock, user_input,"stock")
