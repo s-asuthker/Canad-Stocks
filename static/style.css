@@ -22,6 +22,7 @@ font-family: cursive
     opacity: 0;
     transform: translateX(-70px);
     animation: slideLeft 0.6s ease-out forwards;
+    border-width: 0px;
 }
 @keyframes slideLeft {
     to {
