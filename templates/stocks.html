@@ -13,10 +13,14 @@
     <button type="submit">Enter</button>
   </form>
     <h3 style="display:inline">The current market price is: </h3>
-    <h3 style="display:inline">${{price}}</h3>
+    <div class="fade-in">
+        <h3 style="display:inline">${{price}}</h3>
+    </div>
     <h3>Graph:</h3>
     <div class="flex_contain">
-        <img src="data:image/png;base64,{{ graph }}" alt="Stock Graph" class="images">
+        <div class="slide">
+            <img src="data:image/png;base64,{{ graph }}" alt="Stock Graph" class="images">
+        </div>
         <p>52-Week High: </p>
         <h3>${{stock_dic['52wh']}}</h3>
 
