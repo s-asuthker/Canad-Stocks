@@ -48,7 +48,9 @@ h2{
     transition: all 0.3s ease;
 }
 .flex_contain{
-    display: flex;    align-items: flex-start;
+    display: flex;    
+    align-items: flex-start;
+    border-width: 0px;
 }
 .fbox{
     display: flex;
