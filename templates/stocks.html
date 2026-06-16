@@ -21,14 +21,16 @@
         <div class="slide">
             <img src="data:image/png;base64,{{ graph }}" alt="Stock Graph" class="images">
         </div>
-        <p>52-Week High: </p>
-        <h3>${{stock_dic['52wh']}}</h3>
-
-        <p>52-Week Low</p>
-        <h3>${{stock_dic['52wl']}}</h3>
-
-        <p>Average Volume</p>
-        <h3>{{stock_dic['vol']}} shares</h3>
+        <div class="fade-in">
+            <p>52-Week High: </p>
+            <h3>{{stock_dic['52wh']}}</h3>
+    
+            <p>52-Week Low</p>
+            <h3>{{stock_dic['52wl']}}</h3>
+    
+            <p>Average Volume</p>
+            <h3>{{stock_dic['vol']}}</h3>
+        </div>
     </div>
     <div class="blackbox">
         <h2>Current Gold Price: </h2>
@@ -46,6 +48,22 @@
         <h2>USD → GBP</h2>
         <h3>{{ rate_dic["USD->GBP"] }}</h3>
     </div>
+    <script>
+        function getStock() {
+            const ticker = document.getElementById("ticker").value;
+            fetch("https://web-production-a841f.up.railway.app/stock?ticker=" + ticker)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("result").innerHTML =
+                        "<h2>" + ticker + "</h2>" +
+                        "<p>Price: " + data.price + "</p>" +
+                        "<img src='data:image/png;base64," + data.graph + "' />";
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }
+    </script>
 </body>
 </html>
 
