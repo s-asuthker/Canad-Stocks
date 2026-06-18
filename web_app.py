@@ -3,7 +3,8 @@ import yfinance as yf
 import pandas as pd
 import matplotlib.pyplot as plt
 from flask import Flask, render_template, request, jsonify
-import io, base64, datetime, time, os
+import io, base64, datetime, time
+import os
 from datetime import date
 from forex_python.converter import CurrencyRates
 matplotlib.use('Agg')
