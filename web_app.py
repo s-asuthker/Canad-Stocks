@@ -92,7 +92,7 @@ def stock_graph():
     gold_price=gold.history(period="1d")['Close'].iloc[-1]
     #this code gets current exchange rate sbetween popular currencies
     rates=get_rate()
-    return render_template("stocks.html",price=closing_price, graph=stock_graph_img,wgold_price=gold_price,rate_dic=rates,stock_dic=stock_data_dic)
+    return render_template("index.html",price=closing_price, graph=stock_graph_img,wgold_price=gold_price,rate_dic=rates,stock_dic=stock_data_dic)
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
