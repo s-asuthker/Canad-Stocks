@@ -87,15 +87,15 @@ def stock_graph():
                 print(f"Sorry, it looks like there was an error: {e}")
 
     #this code gets gold prices
+    gold_price = None
     try:
         gold = yf.Ticker("GC=F")
-    except:
-        gold_price=None
-    #gold_price = gold.info.get('regularMarketPrice')
-    try:
-        gold_price=gold.history(period="1w")['Close'].iloc[-1]
-    except:
-        gold_price=None
+        hist = gold.history(period="1w")
+        if not hist.empty and 'Close' in hist:
+            gold_price = hist['Close'].iloc[-1]
+    except Exception as e:
+        print("Gold fetch error:", e)
+        gold_price = None
     #this code gets current exchange rate sbetween popular currencies
     rates=get_rate()
     return render_template("index.html",price=closing_price, graph=stock_graph_img,wgold_price=gold_price,rate_dic=rates,stock_dic=stock_data_dic)
