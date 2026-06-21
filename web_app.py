@@ -96,7 +96,10 @@ def stock_graph():
         gold_price=gold.history(period="1d")['Close'].iloc[-1]
     except:
         gold_price=None
-    gold_price=gold.history(period="1w")['Close'].iloc[-1]
+    try:
+        gold_price=gold.history(period="1w")['Close'].iloc[-1]
+    except:
+        gold_price=None
     #this code gets current exchange rate sbetween popular currencies
     rates=get_rate()
     return render_template("index.html",price=closing_price, graph=stock_graph_img,wgold_price=gold_price,rate_dic=rates,stock_dic=stock_data_dic)
