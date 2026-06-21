@@ -8,6 +8,7 @@ import io, base64, datetime, time
 from datetime import date
 from forex_python.converter import CurrencyRates
 matplotlib.use('Agg')
+print("STARTED CODE")
 currencies = [
     ("USD", "EUR"),
     ("EUR", "USD"),
@@ -69,6 +70,7 @@ def stock_graph():
             start = end.replace(year=end.year - 1, day=28) 
         if user_input:
             df_stock = yf.download(user_input, start=start, end=end) #gets stock data
+            print("DF EMPTY:", df_stock.empty)
             stock_data_dic={
                 '52wh':round(df_stock['Close'].max().iloc[0],2),
                 '52wl':round(df_stock['Close'].min().iloc[0],2),
@@ -91,6 +93,7 @@ def stock_graph():
     try:
         gold = yf.Ticker("GC=F")
         hist = gold.history(period="1w")
+        print("GOLD DF:", gold.history(period="1w"))
         if not hist.empty and 'Close' in hist:
             gold_price = hist['Close'].iloc[-1]
     except Exception as e:
@@ -98,6 +101,7 @@ def stock_graph():
         gold_price = None
     #this code gets current exchange rate sbetween popular currencies
     rates=get_rate()
+    
     return render_template("index.html",price=closing_price, graph=stock_graph_img,wgold_price=gold_price,rate_dic=rates,stock_dic=stock_data_dic)
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
