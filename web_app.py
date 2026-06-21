@@ -87,7 +87,10 @@ def stock_graph():
                 print(f"Sorry, it looks like there was an error: {e}")
 
     #this code gets gold prices
-    gold = yf.Ticker("GC=F")
+    try:
+        gold = yf.Ticker("GC=F")
+    except:
+        gold_price=None
     #gold_price = gold.info.get('regularMarketPrice')
     try:
         gold_price=gold.history(period="1d")['Close'].iloc[-1]
